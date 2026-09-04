@@ -1,0 +1,81 @@
+--- INÍCIO DA AUDITORIA DE ROTAS ---
+========================================
+Data/Hora: 2026-08-19 23:49:29
+Teste: Listar frota Scania
+Requisição: GET /scania
+----------------------------------------
+
+Status HTTP: 000
+
+========================================
+Data/Hora: 2026-08-19 23:49:29
+Teste: Buscar Scania por ID
+Requisição: GET /scania/1
+----------------------------------------
+
+Status HTTP: 000
+
+========================================
+Data/Hora: 2026-08-19 23:49:29
+Teste: POST Scania - VIN Inválido (Deve falhar)
+Requisição: POST /scania
+----------------------------------------
+
+Status HTTP: 000
+
+========================================
+Data/Hora: 2026-08-19 23:49:29
+Teste: POST Scania - VIN Válido
+Requisição: POST /scania
+----------------------------------------
+
+Status HTTP: 000
+
+========================================
+Data/Hora: 2026-08-19 23:49:29
+Teste: Listar frota Mercedes
+Requisição: GET /mercedes
+----------------------------------------
+
+Status HTTP: 000
+
+========================================
+Data/Hora: 2026-08-19 23:49:29
+Teste: Listar apenas Actros
+Requisição: GET /mercedes?modelo=Actros
+----------------------------------------
+
+Status HTTP: 000
+
+========================================
+Data/Hora: 2026-08-19 23:49:29
+Teste: Buscar Mercedes por ID
+Requisição: GET /mercedes/1
+----------------------------------------
+
+Status HTTP: 000
+
+========================================
+Data/Hora: 2026-08-19 23:49:29
+Teste: POST Mercedes - VIN Inválido (Deve falhar)
+Requisição: POST /mercedes
+----------------------------------------
+
+Status HTTP: 000
+
+========================================
+Data/Hora: 2026-08-19 23:49:29
+Teste: POST Mercedes - VIN Válido
+Requisição: POST /mercedes
+----------------------------------------
+
+Status HTTP: 000
+
+========================================
+Data/Hora: 2026-08-19 23:49:29
+Teste: Testar Rota 404
+Requisição: GET /volvo
+----------------------------------------
+
+Status HTTP: 000
+

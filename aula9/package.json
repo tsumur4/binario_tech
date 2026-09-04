@@ -1,0 +1,16 @@
+{
+	"name": "aula9",
+	"version": "1.0.0",
+	"description": "Relacionamentos e joins em banco relacional com knex.js - binario tech",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js",
+		"migrate": "knex migrate:latest"
+	},
+	"dependencies": {
+		"cors": "^2.8.5",
+		"express": "^4.19.2",
+		"knex": "^3.1.0",
+		"sqlite3": "^5.1.7"
+	}
+}
