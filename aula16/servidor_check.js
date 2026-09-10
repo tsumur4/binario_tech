@@ -14,5 +14,5 @@ app.get('/api/v1/status-servidor', (req, res) => {
 });
 
 app.listen(PORT, () => {
-	console.log(`[BINARIO TECH] servidor de validação da aula 16 ativo na porta ${PORT}`);
+	console.log(`[BINARIO TECH] servidor de validação da aula 16 ativo na porta ${PORT} no cloushell`);
 });
