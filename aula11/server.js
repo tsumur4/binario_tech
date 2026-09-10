@@ -5,7 +5,7 @@ const conectarBanco = require('./src/config/database'); //[cite: 7]
 const alertaRoutes = require('./src/routes/alertaRoutes'); //[cite: 7] Corrigido: importado como alertaRoutes
 
 const app = express();
-const PORT = process.env.PORT || 3000; //[cite: 7]
+const PORT = process.env.PORT || 3019; //[cite: 7]
 
 app.use(cors()); //[cite: 7]
 app.use(express.json()); //[cite: 7]
