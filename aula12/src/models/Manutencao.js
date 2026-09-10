@@ -3,11 +3,15 @@ const mongoose = require('mongoose');
 const itemPecaSchema = new mongoose.Schema({
 	nomePeca: { type: String, required: true },
 	quantidade: { type: Number, required: true, default: 1 },
-	custoUnitario: { type: Number, required: true }
+	custoUnitario: { 
+		type: Number, 
+		required: true, 
+		min: [0, 'O custo unitário não pode ser negativo.'] 
+	}
 });
 
 const manutencaoSchema = new mongoose.Schema({
-	veiculoPlaca: { type: String, require: true, upperCase: true },
+	veiculoPlaca: { type: String, required: true, uppercase: true },
 	tipoManutencao: {
 		type: String,
 		enum: ['PREVENTIVA', 'CORRETIVA', 'EMERGENCIAL'],
@@ -19,5 +23,5 @@ const manutencaoSchema = new mongoose.Schema({
 }, {
 	timestamps: true
 });
-module.exports = mongoose.model('Manutencao', manutencaoSchema);
 
+module.exports = mongoose.model('Manutencao', manutencaoSchema);
