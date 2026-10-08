@@ -1,0 +1,42 @@
+======================
+auditoria prova_aula03
+======================
+
+[1] testando rota scania
+{
+  "montadora": "scania",
+  "modelo": "R440",
+  "status": "OK",
+  "conexao": true,
+  "velocidade_media": 67
+}
+
+[2] Testando rota Mercedes-Benz...
+{
+  "montadora": "mercedes",
+  "modelo": "Actros",
+  "status": "OK",
+  "conexao": true,
+  "velocidade_media": 42
+}
+
+[3] Testando rota Volkswagen...
+{
+  "montadora": "Volkswagen",
+  "modelo": "Delivery",
+  "status": "ALERTA",
+  "conexao": false,
+  "velocidade_media": 0
+}
+
+[4] Testando rota Volvo...
+{
+  "montadora": "Volvo",
+  "modelo": "FH 540",
+  "status": "ALERTA",
+  "conexao": false,
+  "velocidade_media": 0
+}
+
+-----------------------------------------
+Auditoria finalizada com sucesso!
