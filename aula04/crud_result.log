@@ -1,22 +1,58 @@
 ===============================================
  INICIANDO TESTES AUTOMATIZADOS DA API (CRUD)
- Data/Hora: Fri Aug  7 12:07:12 AM UTC 2026
+ Data/Hora: Fri Oct  2 06:55:46 PM UTC 2026
 ===============================================
 
 >>> [1/4] POST: Cadastrando 1º veiculo (Scania R500)...
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 86
+ETag: W/"56-YxzR8MdDgvt6rKC3Fzr965PNSEg"
+Date: Fri, 02 Oct 2026 18:55:46 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 
+{"id":3,"placa":"MNO-1122","montadora":"Scania","modelo":"R500","status":"DISPONIVEL"}
 
 
 >>> [2/4] POST: Cadastrando 2º veiculo (DAF XF)...
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 81
+ETag: W/"51-0WCihj8NLCvcQEaNR7gwz9wkc1c"
+Date: Fri, 02 Oct 2026 18:55:46 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 
+{"id":4,"placa":"PQR-3344","montadora":"DAF","modelo":"XF","status":"DISPONIVEL"}
 
 
 >>> [3/4] PATCH: Atualizando status do veiculo ID 3 para EM_ROTA...
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 139
+ETag: W/"8b-m7pHBRe61nluH36HnsPEpnjD+cE"
+Date: Fri, 02 Oct 2026 18:55:46 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 
+{"mensagem":"status atualizado com sucesso!","veiculo":{"id":3,"placa":"MNO-1122","montadora":"Scania","modelo":"R500","status":"EM_ROTA"}}
 
 
 >>> [4/4] DELETE: Deletando o veiculo ID 4...
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 49
+ETag: W/"31-qNvbusEzll80eN5vHaRO13cTRmo"
+Date: Fri, 02 Oct 2026 18:55:46 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 
+{"mensagem":"Veiculo ID 4 removido com sucesso."}
 
 
 ===============================================
