@@ -1,0 +1,406 @@
+==========================================
+    INICIANDO AUDITORIA DE SEGURANÇA      
+==========================================
+
+--- 1. Teste Health Check (200 OK - Público) ---
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 75
+ETag: W/"4b-JX0Mgz+L1GIEUYZfR4CNiRBJF/I"
+Date: Thu, 22 Oct 2026 13:41:20 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"status":"UP","timestamp":"2026-10-22T13:41:20.407Z","uptime":14.47797007}
+
+
+--- 2. Teste Sem Autenticação (401 Unauthorized) ---
+HTTP/1.1 401 Unauthorized
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 105
+ETag: W/"69-Bp3Yv2rq1oVH/iUlz7GJyytE3sU"
+Date: Thu, 22 Oct 2026 13:41:20 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Autorizado","message":"Chave de API inválida ou não fornecida no cabeçalho X-API-KEY."}
+
+
+--- 3. Teste Com Chave Inválida (401 Unauthorized) ---
+HTTP/1.1 401 Unauthorized
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 105
+ETag: W/"69-Bp3Yv2rq1oVH/iUlz7GJyytE3sU"
+Date: Thu, 22 Oct 2026 13:41:20 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Autorizado","message":"Chave de API inválida ou não fornecida no cabeçalho X-API-KEY."}
+
+
+--- 4. Teste Validação de CNH Inválida (400 Bad Request) ---
+HTTP/1.1 400 Bad Request
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 117
+ETag: W/"75-g8z970X/ko6TVkz+Weq8KOWXorU"
+Date: Thu, 22 Oct 2026 13:41:20 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Requisição Inválida","message":"A CNH é obrigatória e deve conter exatamente 11 dígitos numéricos."}
+
+
+--- 5. Teste Cadastro Bem-sucedido (201 Created) ---
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 124
+ETag: W/"7c-4iV3F/gQqCNkMmbRfkFU0ttUgoQ"
+Date: Thu, 22 Oct 2026 13:41:20 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"sucesso":true,"mensagem":"Motorista cadastrado com sucesso!","dados":{"id":2,"nome":"Maria Oliveira","cnh":"98765432100"}}
+
+
+--- 6. Teste Consulta Autenticada (200 OK) ---
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 130
+ETag: W/"82-J94NqsmVysgo2oUxt8p3DS4eVcY"
+Date: Thu, 22 Oct 2026 13:41:20 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"sucesso":true,"dados":[{"id":1,"nome":"Carlos Silva","cnh":"12345678901"},{"id":2,"nome":"Maria Oliveira","cnh":"98765432100"}]}
+
+
+--- 7. Teste Rota Inexistente (404 Not Found) ---
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 80
+ETag: W/"50-s7JoZ81jDA5T5RUY6BQPGvUMcSw"
+Date: Thu, 22 Oct 2026 13:41:20 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Encontrado","message":"A rota solicitada não existe nesta API."}
+
+
+==========================================
+         AUDITORIA CONCLUÍDA              
+==========================================
+==========================================
+    INICIANDO AUDITORIA DE SEGURANÇA      
+==========================================
+
+--- 1. Teste Health Check (200 OK - Público) ---
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 78
+ETag: W/"4e-MFZoZ1KvZqpxNSP+TolU228qBcQ"
+Date: Thu, 22 Oct 2026 13:44:49 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"status":"ONLINE","timestamp":"2026-10-22T13:44:49.754Z","uptime":4.05273704}
+
+
+--- 2. Teste Sem Autenticação (401 Unauthorized) ---
+HTTP/1.1 401 Unauthorized
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 105
+ETag: W/"69-Bp3Yv2rq1oVH/iUlz7GJyytE3sU"
+Date: Thu, 22 Oct 2026 13:44:49 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Autorizado","message":"Chave de API inválida ou não fornecida no cabeçalho X-API-KEY."}
+
+
+--- 3. Teste Com Chave Inválida (401 Unauthorized) ---
+HTTP/1.1 401 Unauthorized
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 105
+ETag: W/"69-Bp3Yv2rq1oVH/iUlz7GJyytE3sU"
+Date: Thu, 22 Oct 2026 13:44:49 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Autorizado","message":"Chave de API inválida ou não fornecida no cabeçalho X-API-KEY."}
+
+
+--- 4. Teste Validação de CNH Inválida (400 Bad Request) ---
+HTTP/1.1 400 Bad Request
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 117
+ETag: W/"75-g8z970X/ko6TVkz+Weq8KOWXorU"
+Date: Thu, 22 Oct 2026 13:44:49 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Requisição Inválida","message":"A CNH é obrigatória e deve conter exatamente 11 dígitos numéricos."}
+
+
+--- 5. Teste Cadastro Bem-sucedido (201 Created) ---
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 124
+ETag: W/"7c-4iV3F/gQqCNkMmbRfkFU0ttUgoQ"
+Date: Thu, 22 Oct 2026 13:44:49 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"sucesso":true,"mensagem":"Motorista cadastrado com sucesso!","dados":{"id":2,"nome":"Maria Oliveira","cnh":"98765432100"}}
+
+
+--- 6. Teste Consulta Autenticada (200 OK) ---
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 130
+ETag: W/"82-J94NqsmVysgo2oUxt8p3DS4eVcY"
+Date: Thu, 22 Oct 2026 13:44:49 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"sucesso":true,"dados":[{"id":1,"nome":"Carlos Silva","cnh":"12345678901"},{"id":2,"nome":"Maria Oliveira","cnh":"98765432100"}]}
+
+
+--- 7. Teste Rota Inexistente (404 Not Found) ---
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 80
+ETag: W/"50-s7JoZ81jDA5T5RUY6BQPGvUMcSw"
+Date: Thu, 22 Oct 2026 13:44:49 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Encontrado","message":"A rota solicitada não existe nesta API."}
+
+
+==========================================
+         AUDITORIA CONCLUÍDA              
+==========================================
+==========================================
+    INICIANDO AUDITORIA DE SEGURANÇA      
+==========================================
+
+--- 1. Teste Rota Inexistente (404 Not Found) ---
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 80
+ETag: W/"50-s7JoZ81jDA5T5RUY6BQPGvUMcSw"
+Date: Thu, 22 Oct 2026 14:27:44 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Encontrado","message":"A rota solicitada não existe nesta API."}
+
+
+--- 2. Teste Health Check (200 OK - Público) ---
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 81
+ETag: W/"51-20y/HiTVVpW9Sx52Tp17H6bXPsI"
+Date: Thu, 22 Oct 2026 14:27:44 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"status":"ONLINE","timestamp":"2026-10-22T14:27:44.737Z","uptime":443.783233098}
+
+
+--- 3. Teste Sem Autenticação (401 Unauthorized) ---
+HTTP/1.1 401 Unauthorized
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 105
+ETag: W/"69-Bp3Yv2rq1oVH/iUlz7GJyytE3sU"
+Date: Thu, 22 Oct 2026 14:27:44 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Autorizado","message":"Chave de API inválida ou não fornecida no cabeçalho X-API-KEY."}
+
+
+--- 4. Teste Com Chave Inválida (401 Unauthorized) ---
+HTTP/1.1 401 Unauthorized
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 105
+ETag: W/"69-Bp3Yv2rq1oVH/iUlz7GJyytE3sU"
+Date: Thu, 22 Oct 2026 14:27:44 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Autorizado","message":"Chave de API inválida ou não fornecida no cabeçalho X-API-KEY."}
+
+
+--- 5. Teste Validação de CNH Inválida (400 Bad Request) ---
+HTTP/1.1 400 Bad Request
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 117
+ETag: W/"75-g8z970X/ko6TVkz+Weq8KOWXorU"
+Date: Thu, 22 Oct 2026 14:27:44 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Requisição Inválida","message":"A CNH é obrigatória e deve conter exatamente 11 dígitos numéricos."}
+
+
+--- 6. Teste Cadastro Bem-sucedido (201 Created) ---
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 124
+ETag: W/"7c-4iV3F/gQqCNkMmbRfkFU0ttUgoQ"
+Date: Thu, 22 Oct 2026 14:27:44 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"sucesso":true,"mensagem":"Motorista cadastrado com sucesso!","dados":{"id":2,"nome":"Maria Oliveira","cnh":"98765432100"}}
+
+
+--- 7. Teste Consulta Autenticada (200 OK) ---
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 130
+ETag: W/"82-J94NqsmVysgo2oUxt8p3DS4eVcY"
+Date: Thu, 22 Oct 2026 14:27:44 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"sucesso":true,"dados":[{"id":1,"nome":"Carlos Silva","cnh":"12345678901"},{"id":2,"nome":"Maria Oliveira","cnh":"98765432100"}]}
+
+
+==========================================
+         AUDITORIA CONCLUÍDA              
+==========================================
+==========================================
+    INICIANDO AUDITORIA DE SEGURANÇA      
+==========================================
+
+--- 1. Teste Sem Autenticação (401 Unauthorized) ---
+HTTP/1.1 401 Unauthorized
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 105
+ETag: W/"69-Bp3Yv2rq1oVH/iUlz7GJyytE3sU"
+Date: Thu, 22 Oct 2026 14:32:46 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Autorizado","message":"Chave de API inválida ou não fornecida no cabeçalho X-API-KEY."}
+
+
+--- 2. Teste Com Chave Inválida (401 Unauthorized) ---
+HTTP/1.1 401 Unauthorized
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 105
+ETag: W/"69-Bp3Yv2rq1oVH/iUlz7GJyytE3sU"
+Date: Thu, 22 Oct 2026 14:32:46 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Autorizado","message":"Chave de API inválida ou não fornecida no cabeçalho X-API-KEY."}
+
+
+--- 3. Teste Validação de CNH Inválida (400 Bad Request) ---
+HTTP/1.1 400 Bad Request
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 117
+ETag: W/"75-g8z970X/ko6TVkz+Weq8KOWXorU"
+Date: Thu, 22 Oct 2026 14:32:46 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Requisição Inválida","message":"A CNH é obrigatória e deve conter exatamente 11 dígitos numéricos."}
+
+
+--- 4. Teste Rota Inexistente (404 Not Found) ---
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 80
+ETag: W/"50-s7JoZ81jDA5T5RUY6BQPGvUMcSw"
+Date: Thu, 22 Oct 2026 14:32:46 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Encontrado","message":"A rota solicitada não existe nesta API."}
+
+
+--- 5. Teste Cadastro Bem-sucedido (201 Created) ---
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 124
+ETag: W/"7c-4iV3F/gQqCNkMmbRfkFU0ttUgoQ"
+Date: Thu, 22 Oct 2026 14:32:46 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"sucesso":true,"mensagem":"Motorista cadastrado com sucesso!","dados":{"id":2,"nome":"Maria Oliveira","cnh":"98765432100"}}
+
+
+--- 6. Teste Cadastro Bem-sucedido (201 Created) ---
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 80
+ETag: W/"50-s7JoZ81jDA5T5RUY6BQPGvUMcSw"
+Date: Thu, 22 Oct 2026 14:32:46 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Não Encontrado","message":"A rota solicitada não existe nesta API."}
+
+
+==========================================
+         AUDITORIA CONCLUÍDA              
+==========================================
