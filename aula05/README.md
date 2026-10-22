@@ -1,25 +1,35 @@
-Aula 05 — Middlewares e segurança básica
-Preparação:
+### Aula 05 — Middlewares e segurança básica
 
+**Preparação:**
+
+```bash
 cd ~/binario_tech && mkdir -p aula05/routes aula05/middlewares && cd aula05
 npm init -y
 npm install express cors
-Estrutura montada: middlewares/logger.js (log de método/rota/status/duração), middlewares/auth.js (exige o header X-API-KEY: binario-tech-secret-2026) e routes/motoristas.js, unidos no app.js com cors(), express.json(), o logger global e um handler 404 no final.
+```
 
+Estrutura montada: `middlewares/logger.js` (log de método/rota/status/duração), `middlewares/auth.js` (exige o header `X-API-KEY: binario-tech-secret-2026`) e `routes/motoristas.js`, unidos no `app.js` com `cors()`, `express.json()`, o logger global e um handler 404 no final.
+
+```bash
 node app.js &
 curl -s http://localhost:3013/api/v1/health | jq .
 curl -s http://localhost:3013/api/v1/motoristas | jq .                                   # sem chave -> 401
 curl -s -H "X-API-KEY: binario-tech-secret-2026" http://localhost:3013/api/v1/motoristas | jq .   # com chave -> 200
-✅ já no código — logger, auth e a rota de motoristas com validação estão implementados.
+```
 
-Exercício 1 — conferir o log da rota /health
+✅ **já no código** — logger, auth e a rota de motoristas com validação estão implementados.
 
+**Exercício 1 — conferir o log da rota `/health`**
+```bash
 curl -s http://localhost:3013/api/v1/health | jq .
+```
 No terminal onde o servidor está rodando aparece uma linha assim:
-
+```
 [LOG 2026-08-07T13:12:00.000Z] GET /api/v1/health - Status: 200 (2ms)
-Exercício 2 — routes/manutencoes.js
+```
 
+**Exercício 2 — `routes/manutencoes.js`**
+```js
 const express = require('express');
 const router = express.Router();
 let manutencoes = [];
@@ -35,18 +45,21 @@ router.post('/', (req, res) => {
   res.status(201).json(nova);
 });
 module.exports = router;
-✅ já no código — arquivo novo, não mexe em nada do que já existia.
+```
+✅ **já no código** — arquivo novo, não mexe em nada do que já existia.
 
-Teste isolado (array próprio, manutencoes, separado do array de motoristas — não interfere nos outros exercícios):
-
+Teste isolado (array próprio, `manutencoes`, separado do array de motoristas — não interfere nos outros exercícios):
+```bash
 curl -s -H "X-API-KEY: binario-tech-secret-2026" -X POST http://localhost:3013/api/v1/manutencoes \
   -H "Content-Type: application/json" \
   -d '{"veiculo":"SCA-0001","descricao":"Troca de oleo","valor":350}' | jq .
 curl -s -H "X-API-KEY: binario-tech-secret-2026" http://localhost:3013/api/v1/manutencoes | jq .
-Exercício 3 — registrar /api/v1/manutencoes com authMiddleware
+```
 
-Adicionar dentro de app.js, junto do outro app.use de rota já existente:
+**Exercício 3 — registrar `/api/v1/manutencoes` com `authMiddleware`**
 
+Adicionar dentro de `app.js`, junto do outro `app.use` de rota já existente:
+```js
 // ------- CÓDIGO ANTIGO (já existe) -------
 const motoristasRouter = require('./routes/motoristas');
 app.use('/api/v1/motoristas', authMiddleware, motoristasRouter);
@@ -54,10 +67,11 @@ app.use('/api/v1/motoristas', authMiddleware, motoristasRouter);
 // ------- CÓDIGO NOVO (adicionar aqui) -------
 const manutencoesRouter = require('./routes/manutencoes');
 app.use('/api/v1/manutencoes', authMiddleware, manutencoesRouter);
-✅ já no código — a rota exige a mesma chave X-API-KEY das outras (mostrado no teste do exercício 2 acima).
+```
+✅ **já no código** — a rota exige a mesma chave `X-API-KEY` das outras (mostrado no teste do exercício 2 acima).
 
-Exercício 4 — middlewares/validaCnh.js
-
+**Exercício 4 — `middlewares/validaCnh.js`**
+```js
 function validaCnh(req, res, next) {
   const { cnh } = req.body;
   if (!cnh || !/^\d{11}$/.test(cnh)) {
@@ -66,12 +80,13 @@ function validaCnh(req, res, next) {
   next();
 }
 module.exports = validaCnh;
-✅ já no código.
+```
+✅ **já no código.**
 
-Exercício 5 — aplicar validaCnh no POST de motoristas e testar CNH inválida
+**Exercício 5 — aplicar `validaCnh` no POST de motoristas e testar CNH inválida**
 
-Dentro de routes/motoristas.js, importar o middleware e encadeá-lo na rota já existente:
-
+Dentro de `routes/motoristas.js`, importar o middleware e encadeá-lo na rota já existente:
+```js
 // ------- CÓDIGO ANTIGO (já existe) -------
 const express = require('express');
 const router = express.Router();
@@ -81,25 +96,34 @@ const validaCnh = require('../middlewares/validaCnh');
 
 // ------- CÓDIGO ANTIGO (a linha do POST já existia, só ganha o novo middleware no meio) -------
 router.post('/', validaCnh, (req, res) => { /* ... lógica de cadastro já existente ... */ });
+```
+```bash
 curl -i -X POST http://localhost:3013/api/v1/motoristas \
   -H "X-API-KEY: binario-tech-secret-2026" -H "Content-Type: application/json" \
   -d '{"nome":"Teste","cnh":"123","categoria":"B"}'
-Resultado esperado: 400 Bad Request. ✅ já no código.
+```
+Resultado esperado: `400 Bad Request`. ✅ **já no código.**
 
-Exercício 6 — rota inexistente → 404 padronizado
-
+**Exercício 6 — rota inexistente → 404 padronizado**
+```bash
 curl -s http://localhost:3013/api/v1/clientes | jq .
-Resultado esperado: {"erro":"Endpoint nao encontrado no servidor Binario Tech."}.
+```
+Resultado esperado: `{"erro":"Endpoint nao encontrado no servidor Binario Tech."}`.
 
-Exercício 7 — script teste_seguranca.sh
+**Exercício 7 — script `teste_seguranca.sh`**
 
-3 tentativas sem chave (401) + 1 tentativa com chave válida (200), tudo salvo em audit_seguranca.log:
+3 tentativas sem chave (401) + 1 tentativa com chave válida (200), tudo salvo em `audit_seguranca.log`:
 
+```bash
 bash teste_seguranca.sh
 cat audit_seguranca.log
-✅ já no código.
+```
+✅ **já no código.**
 
-Exercício 8 — encontrar e matar o processo
-
+**Exercício 8 — encontrar e matar o processo**
+```bash
 ps aux | grep node
 kill -9 <PID>
+```
+
+---
